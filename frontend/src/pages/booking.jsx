@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import '../design/book.css';
+import { useNavigate } from 'react-router-dom';
 
 const Booking = () => {
 
@@ -18,6 +19,7 @@ const Booking = () => {
   });
   const [flexibleDates, setFlexibleDates] = useState(false);
   const [activeClass, setActiveClass] = useState('');
+  const navigate = useNavigate();
 
   // Fetch cities data
   const fetchData = async () => {
@@ -48,6 +50,7 @@ const Booking = () => {
         infants: 0,
         teenagers: 0,
       });
+      setActiveClass(savedData.flightType || ''); 
     }
   }, []);
 
@@ -59,6 +62,7 @@ const Booking = () => {
       depdate,
       arrdate,
       passengers,
+      flightType: activeClass, 
     };
     localStorage.setItem('userFlightData', JSON.stringify(userData));
     console.log('Data saved to local storage:', userData);
@@ -78,10 +82,12 @@ const Booking = () => {
     depdate,
     arrdate,
     passengers,
+    flightType: activeClass, 
   };
   localStorage.setItem('userFlightData', JSON.stringify(userData));
   console.log('Data saved to local storage:', userData);
 };
+
 
 
   const handleArrChange = (e) => {
@@ -97,6 +103,7 @@ const Booking = () => {
       depdate,
       arrdate,
       passengers,
+      flightType: activeClass, 
     };
     localStorage.setItem('userFlightData', JSON.stringify(userData));
     console.log('Data saved to local storage:', userData);
@@ -164,6 +171,32 @@ const Booking = () => {
 
   const handleClassButtonClick = (className) => {
     setActiveClass(className);
+
+    const userData = {
+      depcity,
+      arrcity,
+      depdate,
+      arrdate,
+      passengers,
+      flightType: className, 
+    }
+    localStorage.setItem('userFlightData', JSON.stringify(userData));
+    console.log('Data saved to local storage:', userData);
+  };
+
+  const handleSearchClick = () => {
+    // You can add validation here if needed
+    if (!depcity || !arrcity || !depdate) {
+      alert('Please fill in all required fields');
+      return;
+    }
+    
+    // Navigate to the flights page
+    navigate('/flights');
+  };
+
+  const handleContinue = () => {
+    navigate('/flights');
   };
 
   return (
@@ -385,7 +418,12 @@ const Booking = () => {
           </select>
         </div>
       </div>
-        <button class="search-button1">Search Flights</button>
+        <button 
+          className="search-button1" 
+          onClick={handleSearchClick}
+        >
+          Search Flights
+        </button>
      
         <div class="container">
         <a href="#" class="back-link">
@@ -393,7 +431,12 @@ const Booking = () => {
         </a>
         <a href="#" class="dimensions"></a>
     </div>
-    <button class="next-button1">continue to next step</button>
+    <button 
+      onClick={handleContinue}
+      className="continue-button"
+    >
+      Continue to Flights
+    </button>
 
       {/* <Footer /> */}
     </div>

@@ -1,14 +1,10 @@
-
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/navbar'
-
 import Footer from '../components/footer';
-
-
+import { useNavigate } from 'react-router-dom';
 
 const landing = () => {
-
-
+  const navigate = useNavigate();
 
   // const [data, setdata] = useState([])
   const [cities, setcities] = useState([])
@@ -120,11 +116,16 @@ const landing = () => {
     setActiveClass(className);
   };
 
+  const handleSearch = () => {
+    saveToLocalStorage();
+    navigate('/booking'); // Navigate to booking page
+  };
+
   return (
     <div>
       <Navbar />
       <div className="text">
-        <p>More Than Just a Flight It’s </p>
+        <p>More Than Just a Flight It's </p>
         <p id='hea'>Your Journey</p>
       </div>
       <div className="map"></div>
@@ -233,7 +234,13 @@ const landing = () => {
 
 
 
-          <button type="submit" className="search-button">Search Now</button>
+          <button 
+            type="submit" 
+            className="search-button" 
+            onClick={handleSearch}
+          >
+            Search Now
+          </button>
         </div>
       </div>
 
@@ -323,7 +330,7 @@ const landing = () => {
           <p id='choose'>  Choose Us ?</p>
         </div>
         <div className="info2">
-          <p>At NovaFly, we redefine the flight booking experience to make your journey exceptional. Here’s why discerning travelers chose us</p>
+          <p>At NovaFly, we redefine the flight booking experience to make your journey exceptional. Here's why discerning travelers chose us</p>
         </div>
 
 
@@ -381,7 +388,7 @@ const landing = () => {
             </p>
 
 
-            <p id='para'>"The experience of booking airfare through this website was amazing! The intuitive interface, wide selection of routes, and fast transaction process made my trip more enjoyable.”</p>
+            <p id='para'>"The experience of booking airfare through this website was amazing! The intuitive interface, wide selection of routes, and fast transaction process made my trip more enjoyable."</p>
             <p id='dani'>Daniel Ricciardo</p>
             <p id='bus'>Businessman</p>
 
