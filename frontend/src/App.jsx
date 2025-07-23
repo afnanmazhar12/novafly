@@ -17,6 +17,7 @@ function App() {
         <Route path="/booking" element={<Booking />} />
         <Route path="/flights" element={<Flights />} />
         <Route path="/confirmation" element={<Confirm />} />
+        
         <Route path="/payment" element={<Payments />} />
         <Route path="/booking-confirmation" element={<BookingConfirmation />} />
         {/* Uncomment these as you add more pages */}

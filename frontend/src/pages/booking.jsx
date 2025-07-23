@@ -347,7 +347,7 @@ const Booking = () => {
             <label className="checkbox-container">
               <input
                 id="check"
-                type="checkbox"
+                types="checkbox"
                 checked={flexibleDates}
                 onChange={handleCheckboxChange}
               />
